@@ -5653,15 +5653,15 @@ duplexify@^3.2.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
-dxdao-staking-rewards-distribution-contracts@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/dxdao-staking-rewards-distribution-contracts/-/dxdao-staking-rewards-distribution-contracts-0.9.2.tgz#aea92309b467bf214e382fb16f43e52f874eefe6"
-  integrity sha512-7FnQbEfGqfFHU3PSMFuDuuiq/nXrZbHnB58puz/RVZ+6GdmgK1Yna8MA0m+UVzK10b+i76ow5pcZoDkvewCKrw==
+dxdao-staking-rewards-distribution-contracts@^0.9.5:
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/dxdao-staking-rewards-distribution-contracts/-/dxdao-staking-rewards-distribution-contracts-0.9.5.tgz#c516068ecbc77bf0408d037de35d18d99e65bd3c"
+  integrity sha512-l4RmpwgG2FGd+V/dKzYqwwXjmewTpgR3jjve5tx5kTYEas0c459JRa7LxyLWeqoMWGYHUV6bcUzRXvkqcKP3qw==
   dependencies:
     "@openzeppelin/contracts" "^4.0.0"
     dxdao-token-registry "git://github.com/nicoelzer/dxDAO-Token-Registry.git#master"
     dxswap-core "git://github.com/levelkdev/dxswap-core.git#v0.3.1"
-    erc20-staking-rewards-distribution-contracts "^0.11.2"
+    erc20-staking-rewards-distribution-contracts "^0.11.4"
 
 "dxdao-token-registry@git://github.com/nicoelzer/dxDAO-Token-Registry.git#master":
   version "0.1.0"
@@ -5853,10 +5853,10 @@ env-paths@^2.2.0:
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-2.2.1.tgz#420399d416ce1fbe9bc0a07c62fa68d67fd0f8f2"
   integrity sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==
 
-erc20-staking-rewards-distribution-contracts@^0.11.2:
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/erc20-staking-rewards-distribution-contracts/-/erc20-staking-rewards-distribution-contracts-0.11.2.tgz#1a1afc21dd8f9fa335ad30e177d2766ff8eaaa09"
-  integrity sha512-b7VijvSatp922X9Af23AK3B5GF4O2ue+VQcHf22wzJeOuy45U+h/l6FpiDhFIqvKxBVTJPw+Q+1SoptD+ImdOg==
+erc20-staking-rewards-distribution-contracts@^0.11.4:
+  version "0.11.4"
+  resolved "https://registry.yarnpkg.com/erc20-staking-rewards-distribution-contracts/-/erc20-staking-rewards-distribution-contracts-0.11.4.tgz#ec3c6532d615bee221f08d071a2a33e0c4555cbd"
+  integrity sha512-kotBvSJFsoRut8zeiz1w5NXpjFk78GA1hxNOS6gd8iPJAHzPk9ey5BChHsgwsDJP9B4SQTf7IPCZi7XfijuEbw==
   dependencies:
     "@openzeppelin/contracts" "^4.0.0"
 
