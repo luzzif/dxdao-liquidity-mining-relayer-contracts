@@ -1,0 +1,52 @@
+{
+    "name": "dxdao-liquidity-mining-relayer-contracts",
+    "version": "0.8.0",
+    "description": "Relayer contracts used to faciliatate liquidity mining campaigns creation on Swapr and other DXdao products using the DXdao multicall plugin.",
+    "files": [
+        "/*.sol",
+        "/build/*.json"
+    ],
+    "scripts": {
+        "lint:eslint": "eslint \"test/**/*.js\"",
+        "lint:prettier": "prettier -l contracts/**/*.sol && prettier -l test/**/*.js",
+        "lint:commit-message": "commitlint -e",
+        "lint": "yarn lint:eslint && yarn lint:prettier",
+        "test": "hardhat test",
+        "test:coverage": "hardhat coverage",
+        "test:gasreport": "cross-env GAS_REPORT_ENABLED=true hardhat test",
+        "compile": "rimraf ./build && rimraf ./artifacts && hardhat compile && mkdirp build && copyfiles -f -E ./artifacts/contracts/*.sol/*.json ./build && rimraf ./build/*.dbg.json",
+        "prepack": "yarn compile && copyfiles -f -E ./contracts/*.sol ./",
+        "postpack": "rimraf ./*.sol",
+        "deploy:rinkeby": "hardhat deploy --network rinkeby --verify"
+    },
+    "author": "Federico Luzzi <fedeluzzi00@gmail.com>",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "@openzeppelin/contracts": "^4.0.0",
+        "dxdao-staking-rewards-distribution-contracts": "^0.9.2"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^11.0.0",
+        "@commitlint/config-conventional": "^11.0.0",
+        "@nomiclabs/hardhat-etherscan": "^2.1.0",
+        "@nomiclabs/hardhat-truffle5": "^2.0.0",
+        "@nomiclabs/hardhat-web3": "^2.0.0",
+        "babel-eslint": "^10.1.0",
+        "bn.js": "^5.1.3",
+        "chai": "^4.2.0",
+        "copyfiles": "^2.4.1",
+        "cross-env": "^7.0.3",
+        "dotenv": "^8.2.0",
+        "eslint": "^7.17.0",
+        "hardhat": "^2.0.7",
+        "hardhat-gas-reporter": "^1.0.4",
+        "husky": "^4.3.7",
+        "mkdirp": "^1.0.4",
+        "prettier": "^2.1.2",
+        "prettier-plugin-solidity": "^1.0.0-beta.3",
+        "rimraf": "^3.0.2",
+        "solhint-plugin-prettier": "^0.0.5",
+        "solidity-coverage": "^0.7.13",
+        "web3": "^1.3.1"
+    }
+}
