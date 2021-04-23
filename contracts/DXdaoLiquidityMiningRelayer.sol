@@ -18,11 +18,18 @@ contract DXdaoLiquidityMiningRelayer is Ownable {
         bool _locked,
         uint256 _stakingCap
     ) external onlyOwner {
-        require(_rewardTokensAddresses.length == _rewardAmounts.length,"DXdaoLiquidityMiningRelayer: inconsistent reward addresses and amounts array length");
-        for(uint _i; _i < _rewardTokensAddresses.length; _i++) {
-            IERC20(_rewardTokensAddresses[_i]).approve(_factoryAddress, _rewardAmounts[_i]);
+        require(
+            _rewardTokensAddresses.length == _rewardAmounts.length,
+            "DXdaoLiquidityMiningRelayer: inconsistent reward addresses and amounts array length"
+        );
+        for (uint256 _i; _i < _rewardTokensAddresses.length; _i++) {
+            IERC20(_rewardTokensAddresses[_i]).approve(
+                _factoryAddress,
+                _rewardAmounts[_i]
+            );
         }
-        IDXdaoERC20StakingRewardsDistributionFactory _factory = IDXdaoERC20StakingRewardsDistributionFactory(_factoryAddress);
+        IDXdaoERC20StakingRewardsDistributionFactory _factory =
+            IDXdaoERC20StakingRewardsDistributionFactory(_factoryAddress);
         _factory.createDistribution(
             _rewardTokensAddresses,
             _stakableTokenAddress,
@@ -32,7 +39,22 @@ contract DXdaoLiquidityMiningRelayer is Ownable {
             _locked,
             _stakingCap
         );
-        IERC20StakingRewardsDistribution _createdDistribution = IERC20StakingRewardsDistribution(_factory.distributions(_factory.getDistributionsAmount() - 1));
+        IERC20StakingRewardsDistribution _createdDistribution =
+            IERC20StakingRewardsDistribution(
+                _factory.distributions(_factory.getDistributionsAmount() - 1)
+            );
         _createdDistribution.transferOwnership(msg.sender);
+    }
+
+    function recoverFunds(address[] calldata _tokensAddresses) external {
+        address _owner = owner();
+        for (uint256 _i; _i < _tokensAddresses.length; _i++) {
+            IERC20 _token = IERC20(_tokensAddresses[_i]);
+            uint256 _relayerBalance = _token.balanceOf(address(this));
+            require(
+                _token.transfer(_owner, _relayerBalance),
+                "DXdaoLiquidityMiningRelayer: could not recover ERC20 tokens"
+            );
+        }
     }
 }

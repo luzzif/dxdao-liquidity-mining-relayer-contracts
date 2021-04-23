@@ -1,4 +1,8 @@
-const { task } = require("hardhat/config");
+import { task } from "hardhat/config";
+import {
+    DXdaoLiquidityMiningRelayer__factory,
+    DXdaoLiquidityMiningRelayer,
+} from "../typechain";
 
 task(
     "deploy",
@@ -18,10 +22,10 @@ task(
         await hre.run("clean");
         await hre.run("compile");
 
-        const DXdaoLiquidityMiningRelayer = hre.artifacts.require(
+        const dxDaoLiquidityMiningRelayerFactory = (await hre.ethers.getContractFactory(
             "DXdaoLiquidityMiningRelayer"
-        );
-        const relayer = await DXdaoLiquidityMiningRelayer.new();
+        )) as DXdaoLiquidityMiningRelayer__factory;
+        const relayer = await dxDaoLiquidityMiningRelayerFactory.deploy();
         if (ownerAddress) {
             await relayer.transferOwnership(ownerAddress);
         }

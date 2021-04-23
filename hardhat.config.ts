@@ -1,24 +1,35 @@
-require("dotenv").config();
-require("@nomiclabs/hardhat-truffle5");
-require("solidity-coverage");
-require("hardhat-gas-reporter");
-require("@nomiclabs/hardhat-etherscan");
-require("./tasks/deploy.js");
+import { HardhatUserConfig } from "hardhat/types/config";
+import { config } from "dotenv";
+import "solidity-coverage";
+import "hardhat-gas-reporter";
+import "@nomiclabs/hardhat-etherscan";
+import "@nomiclabs/hardhat-waffle";
+import "@typechain/hardhat";
+import "hardhat-dependency-compiler";
+import "./tasks/deploy";
+
+config();
 
 const infuraId = process.env.INFURA_ID;
+const accounts = process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [];
 
-module.exports = {
+const hardhatConfig: HardhatUserConfig = {
     networks: {
         mainnet: {
             url: `https://mainnet.infura.io/v3/${infuraId}`,
         },
         rinkeby: {
             url: `https://rinkeby.infura.io/v3/${infuraId}`,
-            accounts: [process.env.PRIVATE_KEY],
+            accounts,
         },
         arbitrumTestnetV3: {
             url: "https://kovan3.arbitrum.io/rpc",
-            accounts: [process.env.PRIVATE_KEY],
+            accounts,
+            gasPrice: 0,
+        },
+        xdai: {
+            url: "https://xdai.poanetwork.dev",
+            accounts,
             gasPrice: 0,
         },
     },
@@ -51,4 +62,13 @@ module.exports = {
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
     },
+    dependencyCompiler: {
+        paths: [
+            "dxdao-staking-rewards-distribution-contracts/DXdaoERC20StakingRewardsDistributionFactory.sol",
+            "erc20-staking-rewards-distribution-contracts/ERC20StakingRewardsDistribution.sol",
+            "@openzeppelin/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol",
+        ],
+    },
 };
+
+export default hardhatConfig;

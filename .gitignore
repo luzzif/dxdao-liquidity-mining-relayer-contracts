@@ -4,6 +4,7 @@ node_modules
 cache
 artifacts
 coverage*
+typechain
 
 yarn-error.log
 
