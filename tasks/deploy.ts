@@ -25,8 +25,10 @@ task(
         const dxDaoLiquidityMiningRelayerFactory = (await hre.ethers.getContractFactory(
             "DXdaoLiquidityMiningRelayer"
         )) as DXdaoLiquidityMiningRelayer__factory;
+        console.log("deploying relayer...");
         const relayer = await dxDaoLiquidityMiningRelayerFactory.deploy();
         if (ownerAddress) {
+            console.log("transferring ownership...");
             await relayer.transferOwnership(ownerAddress);
         }
 
